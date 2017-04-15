@@ -9,6 +9,11 @@ features <- read.table("features.txt")
 ## Identify the features which are mean and standard deviation
 extractFeatures <- grep(".*mean.*|*.std.*",features$V2)
 
+## Clean up the feature names
+features$V2 <- gsub("-mean", 'Mean', features$V2)
+features$V2 <- gsub("-std", 'Std', features$V2)
+features$V2 <- gsub("[-()]", "", features$V2)
+
 ## Read the Test dataset only extracting the 
 testData <- read.table("./test/X_test.txt")[,extractFeatures]
 testActivities <- read.table("./test/Y_test.txt")
@@ -27,7 +32,8 @@ trainData <- cbind(trainSubjects,trainTests,trainData)
 combinedData <- rbind(trainData,testData)
 
 ## Assign column labels
-colnames(combinedData) <- c("subject","activity",as.character(features$V2[extractFeatures]))
+colnames(combinedData) <- c("subject","activity"
+                            ,as.character(features$V2[extractFeatures]))
 
 
 ## Read in the activity names
