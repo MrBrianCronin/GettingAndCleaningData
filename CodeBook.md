@@ -1,4 +1,4 @@
-# Code Book
+# tidydata.txt - Code Book
 
 The below is a description of the data provided in the "tidy.txt" file
 
